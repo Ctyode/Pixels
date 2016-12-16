@@ -11,7 +11,7 @@ public class PanelUtils {
      * @param typeOfCorners 1 - bottom corners, 2 - top, 3 - left, 4 - right
      */
 
-    public Path twoCornersRoundedRect(float left, float top, float right, float bottom, float rx, float ry, int typeOfCorners) {
+    public static Path twoCornersRoundedRect(float left, float top, float right, float bottom, float rx, float ry, int typeOfCorners) {
         Path path = new Path();
         if (rx < 0) rx = 0;
         if (ry < 0) ry = 0;
@@ -82,7 +82,7 @@ public class PanelUtils {
      * @param typeOfCorners 1 - top right, 2 - bottom right, 3 - top left, 4 - bottom left
      */
 
-    public Path oneCornerRoundedRect(float left, float top, float right, float bottom, float rx, float ry, int typeOfCorners) {
+    public static Path oneCornerRoundedRect(float left, float top, float right, float bottom, float rx, float ry, int typeOfCorners) {
         Path path = new Path();
         if (rx < 0) rx = 0;
         if (ry < 0) ry = 0;
