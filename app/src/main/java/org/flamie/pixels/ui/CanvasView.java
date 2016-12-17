@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -13,6 +15,10 @@ import android.view.View;
  * Created by flamie on 17/12/16 :3
  */
 public class CanvasView extends View {
+
+    public static boolean eraserMode = false;
+    public static boolean pencilMode = false;
+    private PorterDuffXfermode eraser;
 
     private float x, y;
     private static final float TOUCH_TOLERANCE = 4;
@@ -40,6 +46,8 @@ public class CanvasView extends View {
         brushPaint.setStrokeJoin(Paint.Join.BEVEL);
         brushPaint.setStrokeCap(Paint.Cap.SQUARE);
         brushPaint.setStrokeWidth(12);
+
+        eraser = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
     }
 
     @Override
@@ -53,6 +61,12 @@ public class CanvasView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        System.out.println(eraserMode);
+        if(eraserMode && !pencilMode) {
+            brushPaint.setXfermode(eraser);
+        } else if(pencilMode && !eraserMode) {
+            brushPaint.setXfermode(null);
+        }
 
         canvas.drawBitmap(bitmap, 0, 0, bitmapPaint);
         canvas.drawPath(path, brushPaint);
