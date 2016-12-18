@@ -28,11 +28,11 @@ public class ToolsPanel extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawPath(PanelUtils.twoCornersRoundedRect(0, (canvas.getHeight() / 2) - dp(150), dp(50), (canvas.getHeight() / 2) + dp(150), dp(4), dp(4), 3), toolsPanelPaint);
+        canvas.drawPath(PanelUtils.twoCornersRoundedRect(0, 0, dp(50), dp(300), dp(4), dp(4), 3), toolsPanelPaint);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(dp(50), dp(300));
     }
 }

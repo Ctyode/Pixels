@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import org.flamie.pixels.ui.buttons.EraserButton;
 import org.flamie.pixels.ui.buttons.PencilButton;
+import org.flamie.pixels.ui.panels.ColorPalettePanel;
 import org.flamie.pixels.ui.panels.ToolsPanel;
 
 import static org.flamie.pixels.util.Dimen.dp;
@@ -33,12 +34,16 @@ public class MainObjects extends RelativeLayout {
         CanvasView canvasView = new CanvasView(context);
         EraserButton eraserButton = new EraserButton(context);
         PencilButton pencilButton = new PencilButton(context);
+        ColorPalettePanel colorPalettePanel = new ColorPalettePanel(context);
+
+        LayoutParams colorPalettePanelLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        colorPalettePanelLayoutParams.leftMargin = dp(100);
 
         LayoutParams toolsPanelLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
         LayoutParams canvasViewLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         canvasViewLayoutParams.addRule(CENTER_IN_PARENT);
-        canvasViewLayoutParams.height = dp(400);
+        canvasViewLayoutParams.height = dp(200);
         canvasViewLayoutParams.width = dp(300);
 
         LayoutParams eraserButtonLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -69,5 +74,7 @@ public class MainObjects extends RelativeLayout {
         addView(toolsPanel, toolsPanelLayoutParams);
         addView(eraserButton, eraserButtonLayoutParams);
         addView(pencilButton, pencilButtonLayoutParams);
+        addView(colorPalettePanel, colorPalettePanelLayoutParams);
     }
+
 }

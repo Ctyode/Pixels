@@ -5,6 +5,4 @@ package org.flamie.pixels.ui.buttons;
  */
 public class BrushButton {
 
-
-
 }

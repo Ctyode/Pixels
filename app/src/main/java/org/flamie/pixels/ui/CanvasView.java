@@ -31,6 +31,8 @@ public class CanvasView extends View {
 
     private Path path;
 
+    public static int color;
+
     public CanvasView(Context context) {
         super(context);
         setBackgroundColor(Color.WHITE);
@@ -41,7 +43,7 @@ public class CanvasView extends View {
         brushPaint = new Paint();
         brushPaint.setAntiAlias(true);
         brushPaint.setDither(true);
-        brushPaint.setColor(Color.GREEN);
+        brushPaint.setColor(color);
         brushPaint.setStyle(Paint.Style.STROKE);
         brushPaint.setStrokeJoin(Paint.Join.BEVEL);
         brushPaint.setStrokeCap(Paint.Cap.SQUARE);
@@ -61,7 +63,9 @@ public class CanvasView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        System.out.println(eraserMode);
+        // TODO: optimize
+        brushPaint.setColor(color);
+
         if(eraserMode && !pencilMode) {
             brushPaint.setXfermode(eraser);
         } else if(pencilMode && !eraserMode) {
