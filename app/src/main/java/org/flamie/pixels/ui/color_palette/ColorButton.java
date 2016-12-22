@@ -1,4 +1,4 @@
-package org.flamie.pixels.ui.buttons;
+package org.flamie.pixels.ui.color_palette;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,7 +15,7 @@ import static org.flamie.pixels.util.Dimen.dp;
 public class ColorButton extends View {
 
     private int color;
-    public Paint colorPaint;
+    private Paint colorPaint;
 
     public ColorButton(Context context, int color) {
         super(context);
@@ -40,5 +40,11 @@ public class ColorButton extends View {
 
     public int getColor() {
         return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+        this.colorPaint.setColor(color);
+        invalidate();
     }
 }

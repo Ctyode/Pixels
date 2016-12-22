@@ -1,4 +1,4 @@
-package org.flamie.pixels.ui.panels;
+package org.flamie.pixels.ui.color_palette;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -27,12 +27,12 @@ public class ColorPalettePanelView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawPath(PanelUtils.twoCornersRoundedRect(0, 0, dp(390), dp(35), dp(4), dp(4), 1), colorPalettePanelPaint);
+        canvas.drawPath(PanelUtils.twoCornersRoundedRect(0, 0, dp(440), dp(35), dp(4), dp(4), 1), colorPalettePanelPaint);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(dp(390), dp(35));
+        setMeasuredDimension(dp(440), dp(35));
     }
 
 }

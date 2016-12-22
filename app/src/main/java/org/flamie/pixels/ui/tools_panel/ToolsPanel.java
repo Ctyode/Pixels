@@ -1,4 +1,4 @@
-package org.flamie.pixels.ui.panels;
+package org.flamie.pixels.ui.tools_panel;
 
 import android.content.Context;
 import android.graphics.Canvas;
