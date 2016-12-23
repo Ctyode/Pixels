@@ -32,13 +32,13 @@ public class ColorWheel extends ViewGroup {
 
     /** Color wheel customize */
     private final int colorWheelRadius = dp(80);
-    private final int colorWheelMarginTop = dp(-20);
+    private final int colorWheelMarginTop = dp(-30);
 
     /** Slider customize */
     private final float valueHeight = dp(25);
     private final float valueWidth = dp(200);
     private final float valuePadding = dp(10);
-    private final int valueMarginTop = dp(100);
+    private final int valueMarginTop = dp(90);
 
     private ColorWheelView colorWheel;
     private ValueSlider valueSlider;

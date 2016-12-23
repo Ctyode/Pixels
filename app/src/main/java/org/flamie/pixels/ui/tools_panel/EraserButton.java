@@ -8,6 +8,8 @@ import android.view.View;
 
 import org.flamie.pixels.R;
 
+import static org.flamie.pixels.util.Dimen.dp;
+
 /**
  * Created by flamie on 17/12/16 :3
  */
@@ -29,8 +31,9 @@ public class EraserButton extends View {
 
     @Override
     public void onMeasure(int measureWidthSpec, int measureHeightSpec) {
-        if(eraserDrawable != null) {
-            setMeasuredDimension(eraserDrawable.getIntrinsicWidth(), eraserDrawable.getIntrinsicHeight());
-        }
+//        if(eraserDrawable != null) {
+//            setMeasuredDimension(eraserDrawable.getIntrinsicWidth(), eraserDrawable.getIntrinsicHeight());
+//        }
+        setMeasuredDimension(dp(48), dp(48));
     }
 }

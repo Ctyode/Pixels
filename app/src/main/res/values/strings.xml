@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Pixels</string>
-    <string name="ok_button">OK</string>
+    <string name="add_button">ADD</string>
 </resources>

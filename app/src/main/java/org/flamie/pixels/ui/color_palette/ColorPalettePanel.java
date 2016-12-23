@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.flamie.pixels.ui.CanvasView;
+import org.flamie.pixels.ui.MainObjects;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -17,12 +18,13 @@ import static org.flamie.pixels.util.Dimen.dp;
  */
 public class ColorPalettePanel extends ViewGroup {
 
+    private PlusButton plusButton;
     private ArrayList<ColorButton> colorButtons = new ArrayList<>(11);
     private ArrayList<Integer> colors = new ArrayList<>(11);
 
     private ColorPalettePanelView colorPalettePanelView;
 
-    public ColorPalettePanel(Context context) {
+    public ColorPalettePanel(Context context, final MainObjects mainObjects) {
         super(context);
         Random random = new Random();
         for (int i = 0; i < 11; i++) {
@@ -51,6 +53,15 @@ public class ColorPalettePanel extends ViewGroup {
             addView(colorButton);
         }
 
+        plusButton = new PlusButton(context);
+        plusButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainObjects.getColorWheelPanel().setVisibility(VISIBLE);
+            }
+        });
+
+        addView(plusButton);
     }
 
     @Override
@@ -63,6 +74,7 @@ public class ColorPalettePanel extends ViewGroup {
             right += left + dp(30);
             colorButton.layout(left, dp(5), right, dp(30));
         }
+        plusButton.layout(dp(390), 0, dp(426), dp(36));
     }
 
     public ArrayList<ColorButton> getColorButtons() {

@@ -28,12 +28,12 @@ public class ColorWheelPanelView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawPath(PanelUtils.roundedRectangle(0, 0, dp(200), dp(250), dp(4), dp(4)), panelPaint);
+        canvas.drawPath(PanelUtils.roundedRectangle(0, 0, dp(200), dp(270), dp(4), dp(4)), panelPaint);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(dp(200), dp(250));
+        setMeasuredDimension(dp(200), dp(270));
     }
 
 }
