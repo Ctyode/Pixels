@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import org.flamie.pixels.util.PanelUtils;
 
 import static org.flamie.pixels.util.Dimen.dp;
+import static org.flamie.pixels.util.MathUtils.clamp;
 
 /**
  * Created by flamie on 20/12/16 :3
@@ -167,10 +168,6 @@ public class ColorWheel extends ViewGroup {
         @Override
         protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             setMeasuredDimension((int) valueWidth, (int) valueHeight);
-        }
-
-        public float clamp(float val, float min, float max) {
-            return Math.max(min, Math.min(max, val));
         }
     }
 

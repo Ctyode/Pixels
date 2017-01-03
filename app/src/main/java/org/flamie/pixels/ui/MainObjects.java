@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import org.flamie.pixels.ui.color_palette.ColorPalettePanel;
 import org.flamie.pixels.ui.color_wheel.ColorWheelPanel;
+import org.flamie.pixels.ui.size_panel.SizePanel;
 import org.flamie.pixels.ui.tools_panel.ToolsPanel;
 
 import static org.flamie.pixels.util.Dimen.dp;
@@ -33,6 +34,7 @@ public class MainObjects extends RelativeLayout {
         final CanvasView canvasView = new CanvasView(context);
         final ColorPalettePanel colorPalettePanel = new ColorPalettePanel(context, this);
         colorWheelPanel = new ColorWheelPanel(context, colorPalettePanel);
+        final SizePanel sizePanel = new SizePanel(context);
 
         colorWheelPanel.setVisibility(INVISIBLE);
 
@@ -40,6 +42,7 @@ public class MainObjects extends RelativeLayout {
         LayoutParams toolsPanelLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         LayoutParams colorPalettePanelLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         LayoutParams colorWheelPanelLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LayoutParams sizePanelLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         canvasViewLayoutParams.addRule(CENTER_IN_PARENT);
         canvasViewLayoutParams.height = dp(200);
@@ -47,11 +50,14 @@ public class MainObjects extends RelativeLayout {
         toolsPanelLayoutParams.addRule(CENTER_VERTICAL);
         colorPalettePanelLayoutParams.addRule(CENTER_HORIZONTAL);
         colorWheelPanelLayoutParams.addRule(CENTER_IN_PARENT);
+        sizePanelLayoutParams.addRule(CENTER_HORIZONTAL);
+        sizePanelLayoutParams.addRule(ALIGN_PARENT_BOTTOM);
 
         addView(canvasView, canvasViewLayoutParams);
         addView(toolsPanel, toolsPanelLayoutParams);
         addView(colorPalettePanel, colorPalettePanelLayoutParams);
         addView(colorWheelPanel, colorWheelPanelLayoutParams);
+        addView(sizePanel, sizePanelLayoutParams);
     }
 
     public ColorWheelPanel getColorWheelPanel() {

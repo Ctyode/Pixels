@@ -7,7 +7,8 @@ import android.graphics.Color;
  */
 public enum ColorsUI {
     
-    PANELS_COLOR(Color.rgb(245, 245, 245));
+    PANELS_COLOR(Color.rgb(245, 245, 245)),
+    SEEK_BAR_COLOR(Color.rgb(69, 90, 100));
 
     private int color;
 
