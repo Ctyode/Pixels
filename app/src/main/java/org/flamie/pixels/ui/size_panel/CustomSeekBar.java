@@ -33,7 +33,7 @@ public class CustomSeekBar extends View {
     private final Paint seekBarPaint;
     private final Paint strokePaint;
 
-    private static int strokePosition;
+    public static int strokePosition;
     private int valuePadding = dp(10);
 
     public CustomSeekBar(Context context) {

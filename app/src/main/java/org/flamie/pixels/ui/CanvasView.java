@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -23,6 +24,7 @@ public class CanvasView extends View {
 
     public static boolean eraserMode = false;
     public static boolean pencilMode = false;
+    private static Rect invalidateArea = new Rect();
     private PorterDuffXfermode eraser;
 
     private float x, y;
@@ -37,7 +39,8 @@ public class CanvasView extends View {
     private Path path;
 
     public static int color;
-
+    private int lastStrokePosition = -1;
+    private int paintWidth = -1;
     public CanvasView(Context context) {
         super(context);
         setBackgroundColor(Color.WHITE);
@@ -56,7 +59,6 @@ public class CanvasView extends View {
 
         eraser = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
     }
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -70,8 +72,14 @@ public class CanvasView extends View {
         super.onDraw(canvas);
         // TODO: optimize
         brushPaint.setColor(color);
-        int paintWidth = (int) clamp(dp(CustomSeekBar.getPosition() / 10), dp(0.5f), dp(100));
-        brushPaint.setStrokeWidth(paintWidth);
+        //reduced count of calculations
+        // also, getPosition() replaced with public field access which is up to 10x faster
+        if(paintWidth < 0 || lastStrokePosition != CustomSeekBar.strokePosition)
+        {
+            lastStrokePosition = CustomSeekBar.strokePosition;
+            paintWidth = (int) clamp(dp(lastStrokePosition / 10), dp(0.5f), dp(100));
+            brushPaint.setStrokeWidth(paintWidth);
+        }
 
         if(eraserMode && !pencilMode) {
             brushPaint.setXfermode(eraser);
@@ -91,25 +99,54 @@ public class CanvasView extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 onStart(x, y);
-                invalidate();
+                //invalidate();                  //doesn't perform anything
                 break;
             case MotionEvent.ACTION_MOVE:
                 onMove(x, y);
-                invalidate();
+                if(invalidateArea.left > invalidateArea.right)
+                {
+                    int tmp = invalidateArea.left;
+                    invalidateArea.left = invalidateArea.right;
+                    invalidateArea.right = tmp;
+                }
+                if(invalidateArea.top > invalidateArea.bottom)
+                {
+                    int tmp = invalidateArea.top;
+                    invalidateArea.top = invalidateArea.bottom;
+                    invalidateArea.bottom = tmp;
+                }
+                invalidate(invalidateArea);                                 //Actually, we need to invalidate only a small piece of the view
+                invalidateArea.left = (int) x;
+                invalidateArea.top = (int) y;
+                //invalidate();
                 break;
             case MotionEvent.ACTION_UP:
                 onUp();
-                invalidate();
+                if(invalidateArea.left > invalidateArea.right)
+                {
+                    int tmp = invalidateArea.left;
+                    invalidateArea.left = invalidateArea.right;
+                    invalidateArea.right = tmp;
+                }
+                if(invalidateArea.top > invalidateArea.bottom)
+                {
+                    int tmp = invalidateArea.top;
+                    invalidateArea.top = invalidateArea.bottom;
+                    invalidateArea.bottom = tmp;
+                }
+                invalidate(invalidateArea);                                 //see comment above
                 break;
         }
         return true;
     }
 
     private void onStart(float x, float y) {
-        path.reset();
+        //path.reset();                         //anyway it resets in onUp()
         path.moveTo(x, y);
         this.x = x;
         this.y = y;
+        invalidateArea.left = (int) x;
+        invalidateArea.top = (int) y;
     }
 
     private void onMove(float x, float y) {
@@ -117,6 +154,8 @@ public class CanvasView extends View {
         float dy = Math.abs(y - this.y);
         if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
             path.quadTo(this.x, this.y, (x + this.x) / 2, (y + this.y) / 2);
+            invalidateArea.right = (int) ((x + this.x) / 2);
+            invalidateArea.bottom = (int) ((y + this.y) / 2);
             this.x = x;
             this.y = y;
         }
@@ -124,6 +163,8 @@ public class CanvasView extends View {
 
     private void onUp() {
         path.lineTo(x, y);
+        invalidateArea.right = (int) (x + this.x);
+        invalidateArea.bottom = (int) (y + this.y);
         canvas.drawPath(path, brushPaint);
         path.reset();
     }
