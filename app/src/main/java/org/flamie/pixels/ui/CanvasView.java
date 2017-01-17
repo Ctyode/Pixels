@@ -11,6 +11,11 @@ import android.graphics.PorterDuffXfermode;
 import android.view.MotionEvent;
 import android.view.View;
 
+import org.flamie.pixels.ui.size_panel.CustomSeekBar;
+
+import static org.flamie.pixels.util.Dimen.dp;
+import static org.flamie.pixels.util.MathUtils.clamp;
+
 /**
  * Created by flamie on 17/12/16 :3
  */
@@ -46,7 +51,7 @@ public class CanvasView extends View {
         brushPaint.setColor(color);
         brushPaint.setStyle(Paint.Style.STROKE);
         brushPaint.setStrokeJoin(Paint.Join.BEVEL);
-        brushPaint.setStrokeCap(Paint.Cap.SQUARE);
+        brushPaint.setStrokeCap(Paint.Cap.ROUND);
         brushPaint.setStrokeWidth(12);
 
         eraser = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
@@ -65,6 +70,8 @@ public class CanvasView extends View {
         super.onDraw(canvas);
         // TODO: optimize
         brushPaint.setColor(color);
+        int paintWidth = (int) clamp(dp(CustomSeekBar.getPosition() / 10), dp(0.5f), dp(100));
+        brushPaint.setStrokeWidth(paintWidth);
 
         if(eraserMode && !pencilMode) {
             brushPaint.setXfermode(eraser);

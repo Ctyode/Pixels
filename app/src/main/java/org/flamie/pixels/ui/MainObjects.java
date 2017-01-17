@@ -38,15 +38,13 @@ public class MainObjects extends RelativeLayout {
 
         colorWheelPanel.setVisibility(INVISIBLE);
 
-        LayoutParams canvasViewLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        LayoutParams canvasViewLayoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         LayoutParams toolsPanelLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         LayoutParams colorPalettePanelLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         LayoutParams colorWheelPanelLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         LayoutParams sizePanelLayoutParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         canvasViewLayoutParams.addRule(CENTER_IN_PARENT);
-        canvasViewLayoutParams.height = dp(200);
-        canvasViewLayoutParams.width = dp(300);
         toolsPanelLayoutParams.addRule(CENTER_VERTICAL);
         colorPalettePanelLayoutParams.addRule(CENTER_HORIZONTAL);
         colorWheelPanelLayoutParams.addRule(CENTER_IN_PARENT);
